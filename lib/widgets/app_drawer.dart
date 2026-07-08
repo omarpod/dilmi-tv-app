@@ -147,7 +147,7 @@ class _DrawerItem extends StatelessWidget {
       title: Text(label, style: const TextStyle(color: Colors.white)),
       onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      hoverColor: color: AppTheme.primary.withOpacity(0.5),
+      hoverColor: AppTheme.primary.withOpacity(0.5),
     );
   }
 }
