@@ -125,7 +125,8 @@ class _LanguageOption extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 14),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primary.withValues(alpha: 0.18) : AppTextColors.surface(context),
+          // تم التعديل هنا لاستخدام withOpacity بدلاً من withValues
+          color: isSelected ? AppTheme.primary.withOpacity(0.18) : AppTextColors.surface(context),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? AppTheme.primary : Colors.transparent,
