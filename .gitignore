@@ -1,0 +1,23 @@
+# ملفات ومجلدات لا يجب رفعها على GitHub (تُنشأ تلقائياً عند البناء)
+
+# مخرجات البناء
+/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# ملفات نظام التشغيل
+.DS_Store
+
+# ملفات بيئات التطوير (IDE)
+.idea/
+.vscode/
+*.iml
+
+# ملاحظة مهمة: لا تضف android/ أو ios/ هنا!
+# GitHub Actions يحتاج هذين المجلدين موجودين في المستودع (repository) ليبني
+# التطبيق. تأكد من تشغيل "flutter create ." محلياً ثم رفع الناتج بالكامل
+# (بما في ذلك android/ و ios/) قبل أول push.

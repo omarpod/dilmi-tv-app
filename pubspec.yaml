@@ -1,0 +1,68 @@
+name: dilmi_tv_app
+description: تطبيق Dilmi TV - يعرض القنوات الرياضية وأخبار المباريات
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # لدعم تعدد اللغات (عربي/فرنسي) في عناصر Flutter الجاهزة (مثل اتجاه النص)
+  flutter_localizations:
+    sdk: flutter
+
+  # لإدارة حالة التطبيق (اللغة الحالية، الوضع المظلم/الفاتح) ومشاركتها
+  # بين كل الشاشات دون تمرير متغيرات يدوياً في كل مكان
+  provider: ^6.1.2
+
+  # لجلب البيانات من الـ API (طلبات HTTP)
+  http: ^1.2.1
+
+  # لفتح رابط البث المباشر (m3u8) في المتصفح أو تطبيق مشغل خارجي
+  url_launcher: ^6.3.0
+
+  # لحفظ تفضيلات المستخدم بشكل دائم على الهاتف: اللغة، الوضع المظلم،
+  # والقنوات/الأخبار المفضّلة
+  shared_preferences: ^2.3.2
+
+  # للإشعارات المحلية (مثل: بدء بث مباشر لمباراة مهمة)
+  flutter_local_notifications: ^17.2.3
+
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # قواعد فحص كود قياسية، يستخدمها GitHub Actions للتأكد من جودة الكود
+  flutter_lints: ^4.0.0
+
+  # أداة تولّد أيقونة التطبيق تلقائياً لكل من Android و iOS من صورة واحدة
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon/
+
+# ==============================================================================
+# إعدادات أيقونة التطبيق (flutter_launcher_icons)
+# ==============================================================================
+# بعد تشغيل: flutter pub get
+# نفّذ الأمر التالي لتوليد الأيقونة فعلياً على كل من Android و iOS:
+#     flutter pub run flutter_launcher_icons
+#
+# لاستبدال الشعار بشعارك الحقيقي لاحقاً: استبدل الملف
+# assets/icon/icon.png بصورة مربعة (يُفضّل 1024x1024) بنفس الاسم،
+# ثم أعد تشغيل الأمر أعلاه.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  # نسخة بخلفية غير شفافة، مطلوبة لأيقونات Android التكيّفية (Adaptive Icons)
+  adaptive_icon_background: "#06181A"
+  adaptive_icon_foreground: "assets/icon/icon.png"
+  min_sdk_android: 21

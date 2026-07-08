@@ -1,0 +1,7 @@
+include: package:flutter_lints/flutter.yaml
+
+# يمكنك تخصيص قواعد إضافية هنا لاحقاً إن أردت قواعد أكثر صرامة أو أكثر مرونة.
+linter:
+  rules:
+    # مثال: إذا أردت السماح بطباعة print() أثناء التطوير دون تحذير
+    # avoid_print: false
