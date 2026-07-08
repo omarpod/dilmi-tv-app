@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.15),
+                      color: AppTheme.primary.withOpacity(0.5),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.live_tv, color: Colors.white, size: 32),
@@ -147,7 +147,7 @@ class _DrawerItem extends StatelessWidget {
       title: Text(label, style: const TextStyle(color: Colors.white)),
       onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      hoverColor: Colors.white.withValues(alpha: 0.05),
+      hoverColor: color: AppTheme.primary.withOpacity(0.5),
     );
   }
 }
