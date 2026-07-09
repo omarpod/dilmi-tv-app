@@ -15,12 +15,12 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java 11
+      # 2) تثبيت Java 17 (هذا هو الإصدار المطلوب حسب خطأ Gradle الأخير)
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
 
       # 3) تثبيت Flutter SDK
       - name: تثبيت Flutter
@@ -34,7 +34,7 @@ jobs:
       - name: تهيئة ملفات المشروع
         run: flutter create --project-name dilmi_tv_app .
 
-      # 5) تثبيت الحزم الأولي
+      # 5) تثبيت الحزم
       - name: تثبيت الحزم
         run: flutter pub get
 
@@ -42,7 +42,7 @@ jobs:
       - name: تنظيف المشروع
         run: flutter clean
 
-      # 7) إعادة تثبيت الحزم (ضروري جداً بعد التنظيف لإنشاء package_config.json)
+      # 7) إعادة تثبيت الحزم (ضروري جداً بعد التنظيف)
       - name: إعادة تثبيت الحزم
         run: flutter pub get
 
