@@ -1,9 +1,7 @@
-name: بناء تطبيق Dilmi TV (Android APK)
+name: بناء تطبيق Dilmi TV (Android AAB)
 
 on:
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -15,48 +13,29 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java 17 (هذا هو الإصدار المطلوب حسب خطأ Gradle الأخير)
-      - name: تثبيت Java
+      - name: تثبيت Java 17
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3) تثبيت Flutter SDK
       - name: تثبيت Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.3'
           channel: 'stable'
-          cache: true
 
-      # 4) تهيئة هيكلية المشروع
-      - name: تهيئة ملفات المشروع
-        run: flutter create --project-name dilmi_tv_app .
-
-      # 5) تثبيت الحزم
       - name: تثبيت الحزم
         run: flutter pub get
 
-      # 6) تنظيف المشروع
       - name: تنظيف المشروع
         run: flutter clean
 
-      # 7) إعادة تثبيت الحزم (ضروري جداً بعد التنظيف)
-      - name: إعادة تثبيت الحزم
-        run: flutter pub get
+      - name: بناء App Bundle
+        run: flutter build appbundle --release
 
-      # 8) توليد أيقونة التطبيق
-      - name: توليد أيقونة التطبيق
-        run: flutter pub run flutter_launcher_icons
-
-      # 9) بناء ملف APK
-      - name: بناء APK
-        run: flutter build apk --release
-
-      # 10) رفع ملف APK
-      - name: رفع ملف APK كمخرجات
+      - name: رفع الملف كمخرجات
         uses: actions/upload-artifact@v4
         with:
-          name: dilmi-tv-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: dilmi-tv-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
