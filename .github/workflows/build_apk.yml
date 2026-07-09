@@ -25,11 +25,14 @@ jobs:
           flutter-version: '3.22.3'
           channel: 'stable'
 
-      # الخدعة هنا: حذف أي ملفات أندرويد قديمة تسبب التعارض
-      - name: حذف ملفات الأندرويد القديمة والتهيئة
+      # هذا هو الكود الذي سيعالج مشكلة الملفات التالفة نهائياً
+      - name: تهيئة الأندرويد من الصفر
         run: |
           rm -rf android
           flutter create --project-name dilmi_tv_app .
+          cd android
+          chmod +x gradlew
+          ./gradlew clean
 
       - name: تثبيت الحزم
         run: flutter pub get
