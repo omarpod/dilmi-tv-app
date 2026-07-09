@@ -15,7 +15,7 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java 11 (أكثر توافقاً مع Gradle في المشاريع)
+      # 2) تثبيت Java 11
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
@@ -30,15 +30,15 @@ jobs:
           channel: 'stable'
           cache: true
 
-      # 4) تحديث Gradle Wrapper لضمان التوافق
-      - name: تحديث Gradle Wrapper
-        run: cd android && ./gradlew wrapper --gradle-version 7.6
+      # 4) تهيئة هيكلية المشروع (هذه الخطوة ستقوم بإنشاء مجلد android إذا كان مفقوداً)
+      - name: تهيئة ملفات المشروع
+        run: flutter create .
 
       # 5) تثبيت الحزم
       - name: تثبيت الحزم
         run: flutter pub get
 
-      # 6) تنظيف المشروع (ضروري لتجنب تضارب الملفات)
+      # 6) تنظيف المشروع
       - name: تنظيف المشروع
         run: flutter clean
 
