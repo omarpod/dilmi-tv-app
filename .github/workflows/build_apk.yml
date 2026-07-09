@@ -17,18 +17,18 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java (مطلوبة لبناء تطبيقات أندرويد)
+      # 2) تثبيت Java (تحديث لنسخة 17 وتأكيد الإعدادات)
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3) تثبيت Flutter SDK
+      # 3) تثبيت Flutter SDK (تغيير الإصدار إذا لزم الأمر، لكن لنجرب إعدادات أسرع)
       - name: تثبيت Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.22.3' # قمنا بتغيير الإصدار لنسخة أكثر استقراراً مع Gradle
           channel: 'stable'
           cache: true
 
