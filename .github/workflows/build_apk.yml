@@ -19,10 +19,11 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: تثبيت Flutter
+      # استخدام إصدار أقدم من Flutter لتجنب خطأ الـ Groovy
+      - name: تثبيت Flutter 3.10.6
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.3'
+          flutter-version: '3.10.6'
           channel: 'stable'
 
       - name: تثبيت الحزم
@@ -34,7 +35,7 @@ jobs:
       - name: بناء App Bundle
         run: flutter build appbundle --release
 
-      - name: رفع الملف كمخرجات
+      - name: رفع الملف
         uses: actions/upload-artifact@v4
         with:
           name: dilmi-tv-release-aab
