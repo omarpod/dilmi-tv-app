@@ -25,11 +25,9 @@ jobs:
           flutter-version: '3.22.3'
           channel: 'stable'
 
-      # إضافة خطوة لترقية Gradle ليتوافق مع Flutter الحديث
-      - name: ترقية Gradle
-        run: |
-          cd android
-          ./gradlew wrapper --gradle-version 8.4
+      # هذا السطر هو الأهم: سينشئ مجلد android وملفات gradle المفقودة
+      - name: تهيئة الأندرويد
+        run: flutter create .
 
       - name: تثبيت الحزم
         run: flutter pub get
