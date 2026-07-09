@@ -15,7 +15,7 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java 11
+      # 2) تثبيت Java 11 (التوافق الأفضل مع المشاريع)
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
@@ -30,9 +30,9 @@ jobs:
           channel: 'stable'
           cache: true
 
-      # 4) تهيئة هيكلية المشروع (هذه الخطوة ستقوم بإنشاء مجلد android إذا كان مفقوداً)
+      # 4) تهيئة ملفات المشروع باسم مقبول برمجياً (بالشرطة السفلية)
       - name: تهيئة ملفات المشروع
-        run: flutter create .
+        run: flutter create --project-name dilmi_tv_app .
 
       # 5) تثبيت الحزم
       - name: تثبيت الحزم
