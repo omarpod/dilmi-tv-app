@@ -25,14 +25,14 @@ jobs:
           flutter-version: '3.22.3'
           channel: 'stable'
 
-      # التعديل الحاسم: فرض اسم مشروع مقبول برمجياً وتجاوز أي تضارب في الأسماء
-      - name: تهيئة الأندرويد باسم صحيح
-        run: flutter create --project-name dilmi_tv_app .
-
-      - name: تنظيف وتثبيت الحزم
+      # الخدعة هنا: حذف أي ملفات أندرويد قديمة تسبب التعارض
+      - name: حذف ملفات الأندرويد القديمة والتهيئة
         run: |
-          flutter clean
-          flutter pub get
+          rm -rf android
+          flutter create --project-name dilmi_tv_app .
+
+      - name: تثبيت الحزم
+        run: flutter pub get
 
       - name: بناء App Bundle
         run: flutter build appbundle --release
