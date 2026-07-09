@@ -15,7 +15,7 @@ jobs:
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java 11 (التوافق الأفضل مع المشاريع)
+      # 2) تثبيت Java 11
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
@@ -30,11 +30,11 @@ jobs:
           channel: 'stable'
           cache: true
 
-      # 4) تهيئة ملفات المشروع باسم مقبول برمجياً (بالشرطة السفلية)
+      # 4) تهيئة هيكلية المشروع
       - name: تهيئة ملفات المشروع
         run: flutter create --project-name dilmi_tv_app .
 
-      # 5) تثبيت الحزم
+      # 5) تثبيت الحزم الأولي
       - name: تثبيت الحزم
         run: flutter pub get
 
@@ -42,15 +42,19 @@ jobs:
       - name: تنظيف المشروع
         run: flutter clean
 
-      # 7) توليد أيقونة التطبيق
+      # 7) إعادة تثبيت الحزم (ضروري جداً بعد التنظيف لإنشاء package_config.json)
+      - name: إعادة تثبيت الحزم
+        run: flutter pub get
+
+      # 8) توليد أيقونة التطبيق
       - name: توليد أيقونة التطبيق
         run: flutter pub run flutter_launcher_icons
 
-      # 8) بناء ملف APK
+      # 9) بناء ملف APK
       - name: بناء APK
         run: flutter build apk --release
 
-      # 9) رفع ملف APK
+      # 10) رفع ملف APK
       - name: رفع ملف APK كمخرجات
         uses: actions/upload-artifact@v4
         with:
