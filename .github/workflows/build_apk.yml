@@ -1,50 +1,56 @@
 name: بناء تطبيق Dilmi TV (Android APK)
 
-# متى يعمل هذا الملف تلقائياً:
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch: # يسمح أيضاً بتشغيله يدوياً من تبويب Actions في GitHub
+  workflow_dispatch:
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) تحميل نسخة من الكود داخل بيئة GitHub
       - name: تحميل الكود
         uses: actions/checkout@v4
 
-      # 2) تثبيت Java (تحديث لنسخة 17 وتأكيد الإعدادات)
+      # 2) تثبيت Java 11 (أكثر توافقاً مع Gradle في المشاريع)
       - name: تثبيت Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '11'
 
-      # 3) تثبيت Flutter SDK (تغيير الإصدار إذا لزم الأمر، لكن لنجرب إعدادات أسرع)
+      # 3) تثبيت Flutter SDK
       - name: تثبيت Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.3' # قمنا بتغيير الإصدار لنسخة أكثر استقراراً مع Gradle
+          flutter-version: '3.22.3'
           channel: 'stable'
           cache: true
 
-      # 4) تحميل مكتبات المشروع (نفس ما يفعله flutter pub get محلياً)
+      # 4) تحديث Gradle Wrapper لضمان التوافق
+      - name: تحديث Gradle Wrapper
+        run: cd android && ./gradlew wrapper --gradle-version 7.6
+
+      # 5) تثبيت الحزم
       - name: تثبيت الحزم
         run: flutter pub get
 
-      # 5) توليد أيقونة التطبيق من الصورة الموجودة في assets/icon/
+      # 6) تنظيف المشروع (ضروري لتجنب تضارب الملفات)
+      - name: تنظيف المشروع
+        run: flutter clean
+
+      # 7) توليد أيقونة التطبيق
       - name: توليد أيقونة التطبيق
         run: flutter pub run flutter_launcher_icons
 
-      # 7) بناء ملف APK نهائي وجاهز للتثبيت
+      # 8) بناء ملف APK
       - name: بناء APK
         run: flutter build apk --release
 
-      # 8) رفع ملف APK الناتج كمرفق يمكن تحميله من صفحة الـ Action نفسها
+      # 9) رفع ملف APK
       - name: رفع ملف APK كمخرجات
         uses: actions/upload-artifact@v4
         with:
