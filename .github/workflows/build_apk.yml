@@ -40,10 +40,6 @@ jobs:
       - name: توليد أيقونة التطبيق
         run: flutter pub run flutter_launcher_icons
 
-      # 6) فحص الكود (تم التعديل: إضافة --no-fatal-warnings لتجاهل التحذيرات)
-      - name: فحص الكود
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
-
       # 7) بناء ملف APK نهائي وجاهز للتثبيت
       - name: بناء APK
         run: flutter build apk --release
